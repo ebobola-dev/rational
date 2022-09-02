@@ -12,6 +12,8 @@ public:
 
 	RationalNum operator+(const RationalNum& num2);
 	RationalNum operator-(const RationalNum& num2);
+	RationalNum operator*(const RationalNum& num2);
+	RationalNum operator/(const RationalNum& num2);
 
 	friend std::ostream& operator<<(std::ostream& , const RationalNum&);
 
@@ -19,5 +21,6 @@ public:
 	int getQ() const;
 
 	bool isNegative() const;
+	bool isZero() const;
 };
 
