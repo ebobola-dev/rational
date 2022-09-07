@@ -9,8 +9,8 @@ class RationalNum {
 	int p;
 
 	void _reduce(int&, int&) const;
-	int _findGCD(int, int) const;
-	int _findLCM(int, int) const;
+	uint32_t _findGCD(int, int) const;
+	uint32_t _findLCM(int, int) const;
 
 public:
 	RationalNum(int);
@@ -41,8 +41,9 @@ public:
 
 	bool isNegative() const;
 	bool isZero() const;
+	bool isInt() const;
 	bool isProper() const;
-	int getIntPart() const;
-	int getQWithoutIntPart() const;
+	//int getIntPart() const;
+	//int getQWithoutIntPart() const;
 };
 

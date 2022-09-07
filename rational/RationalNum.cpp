@@ -136,31 +136,39 @@ bool RationalNum::operator<=(const RationalNum& num2) const {
 }
 
 std::ostream& operator<<(std::ostream& os, const RationalNum& num) {
-	if (num.isZero()) {
-		os << '0';
-	}
-	else {
-		if (num.isNegative()) {
-			os << '-';
-		}
+	if (num.isNegative())
+		os << '-';
+	if (num.isInt())
+		os << abs(num.q);
+	else
 		os << abs(num.q) << '/' << num.p;
-	}
 	return os;
 }
 
 std::istream& operator>>(std::istream& is, RationalNum& num) {
-	is >> num.q >> num.p;
+	int inputQ = 0, inputP = 0;
+	uint32_t steps = 0;
+	while (!inputP) {
+		if (steps)
+			std::cout << "«наменатель не может быть отрицательным!" << std::endl;
+		std::cout << "¬ведите значени€ заново: " << std::endl;
+		is >> inputQ >> inputP;
+		steps++;
+	}
+	num.q = inputQ;
+	num.p = inputP;
 	return is;
 }
 
 int RationalNum::getP() const { return p; }
 int RationalNum::getQ() const { return q; }
 
-bool RationalNum::isNegative() const { return p < 0; }
-bool RationalNum::isZero() const { return p == 0; }
+bool RationalNum::isNegative() const { return q < 0; }
+bool RationalNum::isZero() const { return q == 0; }
+bool RationalNum::isInt() const { return p == 1; }
 bool RationalNum::isProper() const { return q < p; }
-int RationalNum::getIntPart() const { return q / p; }
-int RationalNum::getQWithoutIntPart() const { return q - q / p; }
+//int RationalNum::getIntPart() const { return q / p; }
+//int RationalNum::getQWithoutIntPart() const { return q - q / p; }
 
 void RationalNum::_reduce(int& q, int& p) const {
 	int gcd = _findGCD(q, p);
@@ -170,14 +178,20 @@ void RationalNum::_reduce(int& q, int& p) const {
 	}
 }
 
-int RationalNum::_findGCD(int a, int b) const {
+uint32_t RationalNum::_findGCD(int a, int b) const {
+	a = abs(a);
+	b = abs(b);
 	while (a != 0 && b != 0) {
 		if (a > b)
 			a %= b;
 		else
 			b %= a;
 	}
-	return a + b;
+	return abs(a + b);
 }
 
-int RationalNum::_findLCM(int a, int b) const { return a * b / _findGCD(a, b); }
+uint32_t RationalNum::_findLCM(int a, int b) const {
+	a = abs(a);
+	b = abs(b);
+	return a * b / _findGCD(a, b);
+}
