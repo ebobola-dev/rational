@@ -1,9 +1,8 @@
 #include "RationalNum.h"
 
-RationalNum::RationalNum(int value) {
-	q = value;
-	p = 1;
-}
+RationalNum::RationalNum() : q(0), p(1) {}
+
+RationalNum::RationalNum(int value) : q(value), p(1) {}
 
 RationalNum::RationalNum(int q, int p) {
 	if (!p)
@@ -169,6 +168,14 @@ bool RationalNum::isInt() const { return p == 1; }
 bool RationalNum::isProper() const { return q < p; }
 //int RationalNum::getIntPart() const { return q / p; }
 //int RationalNum::getQWithoutIntPart() const { return q - q / p; }
+CompSign RationalNum::getComparisonSign(const RationalNum& num2) const {
+	if ((*this) < num2)
+		return CompSign::Less;
+	else if ((*this) > num2)
+		return CompSign::More;
+	else
+		return CompSign::Equals;
+}
 
 void RationalNum::_reduce(int& q, int& p) const {
 	int gcd = _findGCD(q, p);

@@ -143,7 +143,8 @@
     <ClCompile Include="source.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="errors.h" />
+    <ClInclude Include="CompSigns.h" />
+    <ClInclude Include="Errors.h" />
     <ClInclude Include="RationalNum.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

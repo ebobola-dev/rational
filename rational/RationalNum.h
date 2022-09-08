@@ -2,7 +2,8 @@
 #include <iostream>
 #include <math.h>
 
-#include "errors.h"
+#include "Errors.h"
+#include "CompSigns.h"
 
 class RationalNum {
 	int q;
@@ -13,6 +14,7 @@ class RationalNum {
 	uint32_t _findLCM(int, int) const;
 
 public:
+	RationalNum();
 	RationalNum(int);
 	RationalNum(int, int);
 
@@ -43,6 +45,7 @@ public:
 	bool isZero() const;
 	bool isInt() const;
 	bool isProper() const;
+	CompSign getComparisonSign(const RationalNum&) const;
 	//int getIntPart() const;
 	//int getQWithoutIntPart() const;
 };
